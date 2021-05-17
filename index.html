@@ -26,6 +26,72 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- Google Maps -->
+  <script>
+    let autocomplete;
+    let gmaps_address;
+
+    function initAutocomplete() {
+      autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('autocomplete'),
+        {
+          componentRestrictions: { 'country': ['US'] }
+        }
+      )
+
+      autocomplete.addListener('place_changed', onPlaceChanged)
+    }
+
+    function onPlaceChanged() {
+      let place = autocomplete.getPlace()
+
+      if (!place.geometry) {
+        //User did not select a prediction, reset the input field
+        document.getElementById('autocomplete').placeholder = 'Enter your address'
+      } else {
+        gmaps_address = place.formatted_address
+        document.getElementById('autocomplete').value = gmaps_address
+        /* let formData = [
+          { "name": "firstname", "value": 'av' },
+          { "name": "lastname", "value": 'av' },
+          { "name": "email", "value": 'av@arka.energy' },
+          { "name": "gmaps_address", "value": gmaps_address },
+          { "name": "phone", "value": 7406220033 }
+        ]
+
+        //hubspot req
+        const requestOptions = {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "omit",
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+          body: JSON.stringify({
+            fields: formData,
+            context: {
+              pageUri: window.location.href,
+              pageName: window.name,
+              //ipAddress: ipAddress,
+              //hutk: getCookie('hubspotutk'),
+            }
+          })
+
+        }
+        fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${19982243}/${'a07419c3-5d5d-4aaf-8806-367accd10bd3'}`, requestOptions)
+          .then(resp => {
+            resp.json().then(data => {
+              console.log('form submitted', data)
+            })
+          }, err => console.log("ERROR ", err))*/
+      }
+    }
+  </script>
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrrBmkO31iyXz88N-SV19nkPRV9InDhcw&libraries=places&callback=initAutocomplete"
+    async defer></script>
 </head>
 
 <body>
@@ -62,7 +128,7 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-xl-8">
-          <a href="https://www.youtube.com/watch?v=WiUOHryNq_E" class="glightbox play-btn mb-4"></a>
+          <a href="https://www.youtube.com/watch?v=sPQRb_gij5E" class="glightbox play-btn mb-4"></a>
         </div>
       </div>
     </div>
@@ -78,7 +144,7 @@
         <div class="w-100 text-white">
           <!-- <h1 class="display-3">Boom</h1> -->
           <p class="lead mb-0" style="font-size: 32px"> Safe, Reliable, Spectacular</p>
-          <a href="https://www.youtube.com/watch?v=LM22YyVz9hg" class="glightbox play-btn mb-4 only-mobile"></a>
+          <a href="https://www.youtube.com/watch?v=sPQRb_gij5E" class="glightbox play-btn mb-4 only-mobile"></a>
         </div>
       </div>
     </div>
@@ -160,23 +226,29 @@
 
         <div class="row">
 
-
           <div class="col-lg-6">
 
             <form method="post" role="form" class="php-email-form" id='contactForm'>
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                  <input type="text" name="firstname" class="form-control" id="name" placeholder="Your First Name"
+                    required>
+                </div>
+                <div class="col-md-6 form-group">
+                  <input type="text" name="lastname" class="form-control" id="name" placeholder="Your Last Name"
+                    required>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
                 </div>
-              </div>
-              <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="phone" class="form-control" name="phone" id="phone" placeholder="Your Phone Number"
+                    required>
+                </div>
+                <div class="form-group mt-3">
+                  <input type="text" class="form-control" name="autocomplete" id="autocomplete"
+                    placeholder="Enter your address" required>
+                </div>
               </div>
               <div class="my-3">
                 <div class="loading" id="loading">Loading</div>
