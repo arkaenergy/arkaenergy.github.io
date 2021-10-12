@@ -230,7 +230,8 @@ submitBtn.addEventListener('click', function (e) {
     { "name": "lastname", "value": formData.get('lastname') },
     { "name": "email", "value": formData.get('email') },
     { "name": "gmaps_address", "value": formData.get('autocomplete') },
-    { "name": "phone", "value": formData.get('phone') }
+    { "name": "phone", "value": formData.get('phone') },
+    { "name": "l2cstage", "value": 'UL' }
   ]
   sendMail(fields)
 })
