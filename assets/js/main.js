@@ -184,7 +184,7 @@ const sendMail = (formData) => {
     }
   }
 
-  let ip = fetch('https://ipv4.jsonip.com').then(response => response.data.ip)
+  let ip = fetch('https://ipv4.jsonip.com').then(response => response.json()).then(json => json.ip)
 
   if (ip) {
     context = { ...context, ipAddress: ip }
