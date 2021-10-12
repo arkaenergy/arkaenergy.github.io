@@ -182,6 +182,7 @@ const sendMail = (formData) => {
 
   if (cookie) {
     context = {
+      ...context,
       hutk: cookie
     }
   }
