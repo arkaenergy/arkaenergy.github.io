@@ -173,12 +173,13 @@ const sendMail = (formData) => {
   const loader = document.getElementsByClassName('loading')[0];
   loader.style.display = 'block';
 
-  let context = {}
+  let context = {
+    pageUri: "https://arka.energy",
+    pageName: "Arka Marketing Website Contact Form"
+  }
 
   if (document.cookie.split(';')[0] && document.cookie.split(';')[0].includes('hubspotutk')) {
     context = {
-      pageUri: "https://arka.energy",
-      pageName: "Arka Marketing Website Contact Form",
       hutk: document.cookie.split(';')[0].split('=')[1]
     }
   }
