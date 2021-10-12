@@ -173,6 +173,24 @@ const sendMail = (formData) => {
   const loader = document.getElementsByClassName('loading')[0];
   loader.style.display = 'block';
 
+  let context = {
+    pageUri: "https://arka.energy",
+    pageName: "Arka Marketing Website Contact Form",
+  }
+
+  if (document.cookie.split(';')[0] && document.cookie.split(';')[0].includes('hubspotutk')) {
+    context = {
+      ...context, hutk: document.cookie.split(';')[0].split('=')[1]
+    }
+  }
+
+  let ip = fetch('https://ipv4.jsonip.com').then(response => response.data.ip)
+
+  if (ip) {
+    context = { ...context, ipAddress: ip }
+  }
+
+
   fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${19982243}/${'a07419c3-5d5d-4aaf-8806-367accd10bd3'}`, {
     method: "POST",
     mode: "cors",
@@ -182,7 +200,8 @@ const sendMail = (formData) => {
       "Content-Type": "application/json; charset=utf-8",
     },
     body: JSON.stringify({
-      fields: formData
+      fields: formData,
+      context
     })
 
   })
