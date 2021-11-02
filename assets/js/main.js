@@ -174,9 +174,16 @@ const sendMail = (formData) => {
   loader.style.display = 'block';
 
   let context = {
-    pageUri: "https://arka.energy",
-    pageName: "Arka Marketing Website Contact Form"
+    pageUri: "https://stagingarkawebsite.z13.web.core.windows.net/",
+    pageName: "Staging - Arka Marketing Website Contact Form"
   }
+  let formId = '87dc5638-e50d-4c06-8e26-1f05e857b85b'
+
+  // let context = {
+  //   pageUri: "https://arka.energy",
+  //   pageName: "Arka Marketing Website Contact Form"
+  // }
+  // let formId = 'a07419c3-5d5d-4aaf-8806-367accd10bd3'
 
   let cookie = getCookie('hubspotutk')
 
@@ -189,7 +196,7 @@ const sendMail = (formData) => {
 
   fetch('https://ipv4.jsonip.com').then(response => response.json()).then(json => json.ip ? context = { ...context, ipAddress: json.ip } : console.log('no ip')).then(json => {
 
-    fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${19982243}/${'a07419c3-5d5d-4aaf-8806-367accd10bd3'}`, {
+    fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${19982243}/${formId}`, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -239,7 +246,7 @@ submitBtn.addEventListener('click', function (e) {
 })
 
 
-function getCookie (name) {
+function getCookie(name) {
   var nameEQ = name + "=";
   var ca = document.cookie.split(';');
   for (var i = 0; i < ca.length; i++) {
